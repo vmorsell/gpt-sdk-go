@@ -45,3 +45,7 @@ func main() {
     fmt.Printf("ChatGPT: %s\n", res.Choices[0].Message.Content)
 }
 ```
+
+### How can I get an API key?
+
+Visit https://platform.openai.com
