@@ -1,6 +1,6 @@
 # ChatGPT SDK for Go
 
-[![Go Reference](https://pkg.go.dev/badge/github.com/vmorsell/gpt-sdk-go.svg)](https://pkg.go.dev/github.com/vmorsell/gpt-sdk-go)
+[![Go Reference](https://pkg.go.dev/badge/github.com/vmorsell/gpt-sdk-go.svg)](https://pkg.go.dev/github.com/vmorsell/gpt-sdk-go/gpt)
 
 ## Getting started
 
