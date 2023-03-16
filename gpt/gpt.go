@@ -113,7 +113,9 @@ func (c *Client) ChatCompletion(in ChatCompletionInput) (*ChatCompletionOutput, 
 	path := "/chat/completions"
 	out := ChatCompletionOutput{}
 
-	c.makeCall(path, in, &out)
+	if err := c.makeCall(path, in, &out); err != nil {
+		return nil, fmt.Errorf("make call: %w", err)
+	}
 
 	return &out, nil
 }
