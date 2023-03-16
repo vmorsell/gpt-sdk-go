@@ -19,7 +19,7 @@ func main() {
 	in := gpt.ChatCompletionInput{
 		Messages: []gpt.Message{
 			{
-				Role:    "user",
+				Role:    gpt.RoleUser,
 				Content: msg,
 			},
 		},

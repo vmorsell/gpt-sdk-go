@@ -15,7 +15,7 @@ You are now ready to make calls to the API.
 	res, err := client.ChatCompletion(gpt.ChatCompletionInput{
 		Messages: []gpt.Message{
 			{
-				Role:    "user",
+				Role:    gpt.RoleUser,
 				Content: "Hello, World!",
 			},
 		},
