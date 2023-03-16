@@ -11,7 +11,7 @@ import (
 
 const (
 	defaultEndpoint = "https://api.openai.com/v1"
-	defaultModel    = "gpt-3.5-turbo"
+	defaultModel    = ModelGPT35Turbo
 	jsonMIME        = "application/json"
 )
 
@@ -119,6 +119,20 @@ func (c *Client) ChatCompletion(in ChatCompletionInput) (*ChatCompletionOutput, 
 
 	return &out, nil
 }
+
+// GPT model names.
+const (
+	// GPT-4.
+	// Note: You currently need special grant to use these (2023-03-16).
+	ModelGPT4        = "gpt-4"
+	ModelGPT40314    = "gpt-4-0314"
+	ModelGPT432k     = "gpt-4-32k"
+	ModelGPT432k0314 = "gpt-4-32k-0314"
+
+	// GPT-3.5.
+	ModelGPT35Turbo     = "gpt-3.5-turbo"
+	ModelGPT35Turbo0301 = "gpt-3.5-turbo-0301"
+)
 
 // ChatCompletionInput is the input to a ChatCompletion call.
 type ChatCompletionInput struct {
