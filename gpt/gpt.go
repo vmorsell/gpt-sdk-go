@@ -152,9 +152,9 @@ type ChatCompletionOutput struct {
 // Choice is a single returned suggestion of what the next chat
 // message could be.
 type Choice struct {
-	Index        int `json:"index"`
-	Message      Message
-	FinishReason string `json:"finish_reason"`
+	Index        int     `json:"index"`
+	Message      Message `json:"message"`
+	FinishReason string  `json:"finish_reason"`
 }
 
 // Message represents a message.
