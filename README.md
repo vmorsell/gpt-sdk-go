@@ -32,9 +32,9 @@ func main() {
     in := gpt.ChatCompletionInput{
         Messages: []gpt.Message{
             {
-				Role:    gpt.RoleSystem,
-				Content: "You are an assistant that speaks like Shakespeare.",
-			},
+                Role:    gpt.RoleSystem,
+                Content: "You are an assistant that speaks like Shakespeare.",
+            },
             {
                 Role:    gpt.RoleUser,
                 Content: msg,
