@@ -9,11 +9,7 @@ Will it reply with _Hello, World!_?
 
 ## Output
 
-```
-User: Hi, ChatGPT! Can you give me a "Hello, World!"?
-ChatGPT:
-
-Hello, World!
-```
+    User: Can you give me a "Hello, World!"?
+    ChatGPT: Greetings and salutations, fair sir or lady! Pray, allow me to express a heartfelt "Hello, World!" to thee.
 
 Please note that the exact output may vary.
