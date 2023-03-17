@@ -28,9 +28,13 @@ func main() {
     config := gpt.NewConfig().WithAPIKey(apiKey)
     client := gpt.NewClient(config)
 
-    msg := "Hi, ChatGPT! Can you give me a \"Hello, World!\"?"
+    msg := "Can you give me a \"Hello, World!\"?"
     in := gpt.ChatCompletionInput{
         Messages: []gpt.Message{
+            {
+				Role:    gpt.RoleSystem,
+				Content: "You are an assistant that speaks like Shakespeare.",
+			},
             {
                 Role:    gpt.RoleUser,
                 Content: msg,
