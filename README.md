@@ -48,9 +48,9 @@ func main() {
         log.Fatalf("chat completion: %v", err)
     }
 
-	if len(res.Choices) == 0 {
-		log.Fatalf("Got 0 choices in the response. This is unexpected.")
-	}
+    if len(res.Choices) == 0 {
+        log.Fatalf("Got 0 choices in the response. This is unexpected.")
+    }
 
     fmt.Printf("ChatGPT: %s\n", res.Choices[0].Message.Content)
 }
