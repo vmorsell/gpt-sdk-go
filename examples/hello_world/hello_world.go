@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/vmorsell/gpt-sdk-go/gpt"
+	"github.com/vmorsell/openai-gpt-sdk-go/gpt"
 )
 
 const (

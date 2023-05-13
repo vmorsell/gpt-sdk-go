@@ -1,4 +1,4 @@
-module github.com/vmorsell/gpt-sdk-go
+module github.com/vmorsell/openai-gpt-sdk-go
 
 go 1.20
 

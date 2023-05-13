@@ -3,7 +3,7 @@ Package gpt provides a client for using the OpenAI Chat API.
 
 # Usage
 
-	import "github.com/vmorsell/gpt-sdk-go/gpt"
+	import "github.com/vmorsell/openai-gpt-sdk-go/gpt"
 
 Initialize a new client.
 
