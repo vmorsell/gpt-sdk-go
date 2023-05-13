@@ -20,6 +20,42 @@ func newClient(t *testing.T) Client {
 	return NewClient(config)
 }
 
+func TestChatCompletion(t *testing.T) {
+	tests := []struct {
+		in      ChatCompletionInput
+		choices []Choice
+		err     error
+	}{
+		{
+			in: ChatCompletionInput{
+				Messages: []Message{
+					{
+						Role:    RoleUser,
+						Content: "Please reply with exactly the text \"Hello, World.\". Nothing more, nothing less.",
+					},
+				},
+			},
+			choices: []Choice{
+				{
+					Index: 0,
+					Message: Message{
+						Role:    RoleAssistant,
+						Content: "Hello, World.",
+					},
+					FinishReason: "stop",
+				},
+			},
+		},
+	}
+
+	for _, tt := range tests {
+		client := newClient(t)
+		res, err := client.ChatCompletion(tt.in)
+		require.Equal(t, tt.err, err)
+		require.Equal(t, tt.choices, res.Choices)
+	}
+}
+
 func TestChatCompletionStream(t *testing.T) {
 	tests := []struct {
 		in     ChatCompletionInput
