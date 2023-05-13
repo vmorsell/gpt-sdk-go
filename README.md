@@ -1,12 +1,12 @@
 # OpenAI GPT SDK for Go
 
-[![Go Reference](https://pkg.go.dev/badge/github.com/vmorsell/gpt-sdk-go.svg)](https://pkg.go.dev/github.com/vmorsell/gpt-sdk-go/gpt)
+[![Go Reference](https://pkg.go.dev/badge/github.com/vmorsell/openai-gpt-sdk-go.svg)](https://pkg.go.dev/github.com/vmorsell/openai-gpt-sdk-go/gpt)
 
 ## Getting started
 
 ### Installing
 
-    go get github.com/vmorsell/gpt-sdk-go
+    go get github.com/vmorsell/openai-gpt-sdk-go
 
 ### Usage
 
@@ -17,7 +17,7 @@ import (
     "fmt"
     "log"
 
-    "github.com/vmorsell/gpt-sdk-go/gpt"
+    "github.com/vmorsell/openai-gpt-sdk-go/gpt"
 )
 
 const (
