@@ -32,7 +32,7 @@ const (
 
 func parseEventData(data []byte) []byte {
 	data = bytes.TrimPrefix(data, []byte(dataPrefix))
-	data = bytes.Trim(data, " \n")
+	data = bytes.Trim(data, "\x5c\x6e ") // \x5c\x63 = \n
 	return data
 }
 
