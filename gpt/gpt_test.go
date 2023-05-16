@@ -8,7 +8,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func newClient(t *testing.T) Client {
+func newClient(t *testing.T) *Client {
 	_ = godotenv.Load("../.env")
 
 	apiKey := os.Getenv("GPT_API_KEY")

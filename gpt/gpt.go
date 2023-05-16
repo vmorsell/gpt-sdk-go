@@ -44,25 +44,19 @@ func (c *Config) WithEndpoint(endpoint string) *Config {
 	return c
 }
 
-// Client is the interface for the OpenAI GPT API.
-type Client interface {
-	ChatCompletion(in ChatCompletionInput) (*ChatCompletionOutput, error)
-	ChatCompletionStream(in ChatCompletionInput, out chan *ChatCompletionChunkEvent) error
-}
-
-type client struct {
+type Client struct {
 	Config *Config
 }
 
 // NewClient returns a pointer to a new initialized client.
-func NewClient(config *Config) Client {
-	return &client{
-		config,
+func NewClient(config *Config) *Client {
+	return &Client{
+		Config: config,
 	}
 }
 
 // makeCall makes a call to the OpenAI API.
-func (c *client) makeCall(httpPath string, payload interface{}, out interface{}) error {
+func (c *Client) makeCall(httpPath string, payload interface{}, out interface{}) error {
 	if payload == nil {
 		return fmt.Errorf("empty payload")
 	}
@@ -112,7 +106,7 @@ func (c *client) makeCall(httpPath string, payload interface{}, out interface{})
 
 // makeCallWithResponseStream makes a call to the OpenAI API with
 // tokens returned as server-sent events.
-func (c *client) makeCallWithResponseStream(httpPath string, payload interface{}, out chan *ChatCompletionChunkEvent) error {
+func (c *Client) makeCallWithResponseStream(httpPath string, payload interface{}, out chan *ChatCompletionChunkEvent) error {
 	if httpPath == "" {
 		return fmt.Errorf("missing path")
 	}
@@ -196,7 +190,7 @@ const (
 )
 
 // ChatCompletion implements the chat completion API method.
-func (c *client) ChatCompletion(in ChatCompletionInput) (*ChatCompletionOutput, error) {
+func (c *Client) ChatCompletion(in ChatCompletionInput) (*ChatCompletionOutput, error) {
 	if in.Stream {
 		return nil, fmt.Errorf("use ChatCompletionStream method instead to stream return data")
 	}
@@ -215,7 +209,7 @@ func (c *client) ChatCompletion(in ChatCompletionInput) (*ChatCompletionOutput, 
 }
 
 // ChatCompletionStream implements the chat completion API method with a response stream.
-func (c *client) ChatCompletionStream(in ChatCompletionInput, out chan *ChatCompletionChunkEvent) error {
+func (c *Client) ChatCompletionStream(in ChatCompletionInput, out chan *ChatCompletionChunkEvent) error {
 	if !in.Stream {
 		return fmt.Errorf("use ChatCompletion method instead")
 	}
