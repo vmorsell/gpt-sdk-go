@@ -1,3 +1,4 @@
+// Package gpt is a SDK for OpenAI's API.
 package gpt
 
 import (
@@ -21,7 +22,8 @@ type Config struct {
 	// The API key to use.
 	APIKey string
 
-	// The API endpoint to use for a client.
+	// The API endpoint to use for a client. You probably don't want to change
+	// this.
 	Endpoint string
 }
 
