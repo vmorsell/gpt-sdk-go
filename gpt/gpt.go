@@ -169,8 +169,8 @@ func (c *Client) makeCallWithResponseStream(httpPath string, payload interface{}
 
 		data := parseEventData(line)
 
-		// Sometimes we might get empty lines.
-		if data == nil {
+		// Ignore empty lines.
+		if len(data) == 0 {
 			continue
 		}
 
