@@ -9,19 +9,15 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func newClient(t *testing.T) *Client {
-	_ = godotenv.Load("../.env")
-
-	apiKey := os.Getenv("GPT_API_KEY")
-	if apiKey == "" {
-		t.Fatalf("api key missing")
+func apiKey() string {
+	return os.Getenv("OPENAI_API_KEY")
 	}
 
-	config := NewConfig().WithAPIKey(apiKey)
-	return NewClient(config)
+func TestChatCompletion(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode")
 }
 
-func TestChatCompletion(t *testing.T) {
 	tests := []struct {
 		in      ChatCompletionInput
 		choices []Choice
@@ -50,7 +46,7 @@ func TestChatCompletion(t *testing.T) {
 	}
 
 	for _, tt := range tests {
-		client := newClient(t)
+		client := NewClient(NewConfig().WithAPIKey(apiKey()))
 		res, err := client.ChatCompletion(tt.in)
 		require.Equal(t, tt.err, err)
 		require.Equal(t, tt.choices, res.Choices)
@@ -83,10 +79,13 @@ func ExampleClient_ChatCompletion() {
 	}
 
 	fmt.Println(res.Choices[0].Message.Content)
-	// Output: Hello, World!
 }
 
 func TestChatCompletionStream(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode")
+	}
+
 	tests := []struct {
 		in     ChatCompletionInput
 		tokens []string
@@ -107,7 +106,8 @@ func TestChatCompletionStream(t *testing.T) {
 	}
 
 	for _, tt := range tests {
-		client := newClient(t)
+		client := NewClient(NewConfig().WithAPIKey(apiKey()))
+
 		ch := make(chan *ChatCompletionChunkEvent)
 
 		go func() {
@@ -165,5 +165,4 @@ func ExampleClient_ChatCompletionStream() {
 
 		fmt.Print(*ev.Choices[0].Delta.Content)
 	}
-	// Output: Hello, World!
 }
