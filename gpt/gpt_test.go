@@ -15,7 +15,7 @@ func apiKey() string {
 func TestChatCompletion(t *testing.T) {
 	if testing.Short() {
 		t.Skip("skipping test in short mode")
-}
+	}
 
 	tests := []struct {
 		in      ChatCompletionInput
