@@ -5,13 +5,12 @@ import (
 	"os"
 	"testing"
 
-	"github.com/joho/godotenv"
 	"github.com/stretchr/testify/require"
 )
 
 func apiKey() string {
 	return os.Getenv("OPENAI_API_KEY")
-	}
+}
 
 func TestChatCompletion(t *testing.T) {
 	if testing.Short() {
@@ -28,7 +27,7 @@ func TestChatCompletion(t *testing.T) {
 				Messages: []Message{
 					{
 						Role:    User,
-						Content: "Please reply with exactly the text \"Hello, World.\". Nothing more, nothing less.",
+						Content: `Please reply with exactly the text "Hello, World.". Nothing more, nothing less.`,
 					},
 				},
 			},
@@ -54,8 +53,9 @@ func TestChatCompletion(t *testing.T) {
 }
 
 func ExampleClient_ChatCompletion() {
-	config := NewConfig().WithAPIKey("xyz")
-	client := NewClient(config)
+	apiKey := ""
+
+	client := NewClient(NewConfig().WithAPIKey(apiKey))
 
 	in := ChatCompletionInput{
 		Messages: []Message{
@@ -134,7 +134,9 @@ func TestChatCompletionStream(t *testing.T) {
 }
 
 func ExampleClient_ChatCompletionStream() {
-	client := NewClient(NewConfig().WithAPIKey("xyz"))
+	apiKey := ""
+
+	client := NewClient(NewConfig().WithAPIKey(apiKey))
 
 	in := ChatCompletionInput{
 		Messages: []Message{

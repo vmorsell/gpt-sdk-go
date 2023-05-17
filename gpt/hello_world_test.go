@@ -2,7 +2,6 @@ package gpt_test
 
 import (
 	"fmt"
-	"log"
 
 	"github.com/vmorsell/openai-gpt-sdk-go/gpt"
 )
@@ -30,12 +29,12 @@ func Example_helloWorld() {
 
 	res, err := client.ChatCompletion(in)
 	if err != nil {
-		log.Fatalf("chat completion: %v", err)
+		panic(err)
 	}
 
 	if len(res.Choices) == 0 {
-		log.Fatalf("Got 0 choices in the response. This is unexpected.")
+		panic("Got 0 choices in the response. This is unexpected.")
 	}
 
-	fmt.Printf("ChatGPT: %s\n", res.Choices[0].Message.Content)
+	fmt.Printf("ShakespeareGPT: %s\n", res.Choices[0].Message.Content)
 }

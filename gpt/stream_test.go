@@ -32,11 +32,11 @@ func Example_stream() {
 		}
 		err := client.ChatCompletionStream(in, ch)
 		if err != nil {
-			panic(fmt.Sprintf("chat completion stream: %v  ", err))
+			panic(err)
 		}
 	}()
 
-	fmt.Printf("ChatGPT: ")
+	fmt.Printf("HaikuGPT: ")
 	for {
 		ev, ok := <-ch
 		if !ok {

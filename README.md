@@ -28,7 +28,7 @@ func main() {
     config := gpt.NewConfig().WithAPIKey(apiKey)
     client := gpt.NewClient(config)
 
-    msg := "Can you give me a \"Hello, World!\"?"
+    msg := `Can you give me a "Hello, World!"?`
     in := gpt.ChatCompletionInput{
         Messages: []gpt.Message{
             {
@@ -45,14 +45,14 @@ func main() {
 
     res, err := client.ChatCompletion(in)
     if err != nil {
-        log.Fatalf("chat completion: %v", err)
+        panic(err)
     }
 
     if len(res.Choices) == 0 {
-        log.Fatalf("Got 0 choices in the response. This is unexpected.")
+        panic("Got 0 choices in response. This is unexpected")
     }
 
-    fmt.Printf("ChatGPT: %s\n", res.Choices[0].Message.Content)
+    fmt.Printf("ShakespeareGPT: %s\n", res.Choices[0].Message.Content)
 }
 ```
 
