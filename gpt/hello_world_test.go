@@ -8,6 +8,7 @@ import (
 
 func Example_helloWorld() {
 	apiKey := ""
+	assistantName := "ShakespeareGPT"
 
 	config := gpt.NewConfig().WithAPIKey(apiKey)
 	client := gpt.NewClient(config)
@@ -17,7 +18,7 @@ func Example_helloWorld() {
 		Messages: []gpt.Message{
 			{
 				Role:    gpt.System,
-				Content: "You are an assistant that speaks like Shakespeare.",
+				Content: fmt.Sprintf("You are %s, a helpful assistant that speaks like Shakespeare.", assistantName),
 			},
 			{
 				Role:    gpt.User,
@@ -36,5 +37,5 @@ func Example_helloWorld() {
 		panic("Got 0 choices in the response. This is unexpected.")
 	}
 
-	fmt.Printf("ShakespeareGPT: %s\n", res.Choices[0].Message.Content)
+	fmt.Printf("%s: %s\n", assistantName, res.Choices[0].Message.Content)
 }

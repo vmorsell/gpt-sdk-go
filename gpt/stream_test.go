@@ -8,6 +8,7 @@ import (
 
 func Example_stream() {
 	apiKey := ""
+	assistantName := "HaikuGPT"
 
 	config := gpt.NewConfig().WithAPIKey(apiKey)
 	client := gpt.NewClient(config)
@@ -21,7 +22,7 @@ func Example_stream() {
 			Messages: []gpt.Message{
 				{
 					Role:    gpt.System,
-					Content: "You are an helpful assistant.",
+					Content: fmt.Sprintf("You are %s, a helpful assistant specialized in writing Japanese haikus.", assistantName),
 				},
 				{
 					Role:    gpt.User,
@@ -36,7 +37,7 @@ func Example_stream() {
 		}
 	}()
 
-	fmt.Printf("HaikuGPT: ")
+	fmt.Printf("%s: ", assistantName)
 	for {
 		ev, ok := <-ch
 		if !ok {
