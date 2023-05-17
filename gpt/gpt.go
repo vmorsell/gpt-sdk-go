@@ -12,35 +12,41 @@ import (
 )
 
 const (
+	// OpenAI API endpoint.
 	DefaultEndpoint = "https://api.openai.com/v1"
-	DefaultModel    = GPT35Turbo
-	jsonMIME        = "application/json"
+
+	// GPT model to use unless specified in the request.
+	DefaultModel = GPT35Turbo
+
+	jsonMIME = "application/json"
 )
 
 // Config provides configuration to a client instance.
 type Config struct {
-	// The API key to use.
+	// OpenAI API key.
 	APIKey string
 
-	// The API endpoint to use for a client. You probably don't want to change
-	// this.
+	// OpenAI API endpoint. You probably don't want to use this.
 	Endpoint string
 }
 
-// NewConfig returns a pointer to a new initialized config.
+// NewConfig returns a new Config pointer that can be chained with builder
+// methods to set multiple configuration values inline without using pointers.
 func NewConfig() *Config {
 	return &Config{
 		Endpoint: DefaultEndpoint,
 	}
 }
 
-// WithAPIKey sets API key for a config.
+// WithAPIKey sets a config APIKey value returning a Config pointer for
+// chaining.
 func (c *Config) WithAPIKey(apiKey string) *Config {
 	c.APIKey = apiKey
 	return c
 }
 
-// WithEndpoint sets endpoint for a config.
+// WithEndpoint sets a config Endpoint value returning a Config pointer for
+// chaining.
 func (c *Config) WithEndpoint(endpoint string) *Config {
 	c.Endpoint = endpoint
 	return c
@@ -50,7 +56,9 @@ type Client struct {
 	Config *Config
 }
 
-// NewClient returns a pointer to a new initialized client.
+// New creates a new config instance of the OpenAI client. If additional
+// configuration is needed for the client instance use the optional aws.Config
+// parameter to add your extra config.
 func NewClient(config *Config) *Client {
 	return &Client{
 		Config: config,
@@ -106,8 +114,9 @@ func (c *Client) makeCall(httpPath string, payload interface{}, out interface{})
 	return nil
 }
 
-// makeCallWithResponseStream makes a call to the OpenAI API with
-// tokens returned as server-sent events.
+// makeCallWithResponseStream makes a call to the OpenAI API with tokens
+// returned as server-sent events. The output channel is closed when the
+// last token is sent.
 func (c *Client) makeCallWithResponseStream(httpPath string, payload interface{}, out chan *ChatCompletionChunkEvent) error {
 	if httpPath == "" {
 		return fmt.Errorf("missing path")
@@ -210,7 +219,9 @@ func (c *Client) ChatCompletion(in ChatCompletionInput) (*ChatCompletionOutput, 
 	return &out, nil
 }
 
-// ChatCompletionStream implements the chat completion API method with a response stream.
+// ChatCompletionStream implements the chat completion API method with a
+// response stream. The output channel is closed when the last event has been
+// sent.
 func (c *Client) ChatCompletionStream(in ChatCompletionInput, out chan *ChatCompletionChunkEvent) error {
 	if !in.Stream {
 		return fmt.Errorf("use ChatCompletion method instead")
