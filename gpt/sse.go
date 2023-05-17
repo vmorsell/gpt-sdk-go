@@ -10,7 +10,7 @@ type ChatCompletionChunkEvent struct {
 	ID      string        `json:"id"`
 	Object  string        `json:"object"`
 	Created int           `json:"created"`
-	Model   ModelType     `json:"model"`
+	Model   Model         `json:"model"`
 	Choices []EventChoice `json:"choices"`
 }
 
@@ -21,8 +21,8 @@ type EventChoice struct {
 }
 
 type Delta struct {
-	Role    RoleType `json:"role"`
-	Content *string  `json:"content"`
+	Role    Role    `json:"role"`
+	Content *string `json:"content"`
 }
 
 const (

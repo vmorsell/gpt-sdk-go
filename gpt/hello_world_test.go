@@ -17,11 +17,11 @@ func Example_helloWorld() {
 	in := gpt.ChatCompletionInput{
 		Messages: []gpt.Message{
 			{
-				Role:    gpt.RoleSystem,
+				Role:    gpt.System,
 				Content: "You are an assistant that speaks like Shakespeare.",
 			},
 			{
-				Role:    gpt.RoleUser,
+				Role:    gpt.User,
 				Content: msg,
 			},
 		},

@@ -31,7 +31,7 @@ func TestChatCompletion(t *testing.T) {
 			in: ChatCompletionInput{
 				Messages: []Message{
 					{
-						Role:    RoleUser,
+						Role:    User,
 						Content: "Please reply with exactly the text \"Hello, World.\". Nothing more, nothing less.",
 					},
 				},
@@ -40,7 +40,7 @@ func TestChatCompletion(t *testing.T) {
 				{
 					Index: 0,
 					Message: Message{
-						Role:    RoleAssistant,
+						Role:    Assistant,
 						Content: "Hello, World.",
 					},
 					FinishReason: "stop",
@@ -64,11 +64,11 @@ func ExampleClient_ChatCompletion() {
 	in := ChatCompletionInput{
 		Messages: []Message{
 			{
-				Role:    RoleSystem,
+				Role:    System,
 				Content: "You are a helpful assistant.",
 			},
 			{
-				Role:    RoleUser,
+				Role:    User,
 				Content: `Please reply with the text "Hello, World!". Nothing else.`,
 			},
 		},
@@ -96,7 +96,7 @@ func TestChatCompletionStream(t *testing.T) {
 			in: ChatCompletionInput{
 				Messages: []Message{
 					{
-						Role:    RoleUser,
+						Role:    User,
 						Content: `Please reply with exactly the text "Hello, World.". Nothing more, nothing less.`,
 					},
 				},
@@ -139,7 +139,7 @@ func ExampleClient_ChatCompletionStream() {
 	in := ChatCompletionInput{
 		Messages: []Message{
 			{
-				Role:    RoleUser,
+				Role:    User,
 				Content: `Please reply with the text "Hello, World!". Nothing else.`,
 			},
 		},

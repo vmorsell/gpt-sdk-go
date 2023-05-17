@@ -82,7 +82,7 @@ func TestParseEvent(t *testing.T) {
 				Choices: []EventChoice{
 					{
 						Delta: Delta{
-							Role: RoleAssistant,
+							Role: Assistant,
 						},
 					},
 				},

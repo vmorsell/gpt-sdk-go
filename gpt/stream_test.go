@@ -20,11 +20,11 @@ func Example_stream() {
 		in := gpt.ChatCompletionInput{
 			Messages: []gpt.Message{
 				{
-					Role:    gpt.RoleSystem,
+					Role:    gpt.System,
 					Content: "You are an helpful assistant.",
 				},
 				{
-					Role:    gpt.RoleUser,
+					Role:    gpt.User,
 					Content: msg,
 				},
 			},
