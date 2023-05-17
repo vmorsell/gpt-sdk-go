@@ -1,4 +1,4 @@
-package main
+package gpt_test
 
 import (
 	"fmt"
@@ -7,15 +7,13 @@ import (
 	"github.com/vmorsell/openai-gpt-sdk-go/gpt"
 )
 
-const (
-	apiKey = ""
-)
+func Example_helloWorld() {
+	apiKey := ""
 
-func main() {
 	config := gpt.NewConfig().WithAPIKey(apiKey)
 	client := gpt.NewClient(config)
 
-	msg := "Can you give me a \"Hello, World!\"?"
+	msg := `Can you give me a "Hello, World!"?`
 	in := gpt.ChatCompletionInput{
 		Messages: []gpt.Message{
 			{

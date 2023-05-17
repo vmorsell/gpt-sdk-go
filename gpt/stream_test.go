@@ -1,4 +1,4 @@
-package main
+package gpt_test
 
 import (
 	"fmt"
@@ -6,11 +6,9 @@ import (
 	"github.com/vmorsell/openai-gpt-sdk-go/gpt"
 )
 
-var (
-	apiKey = ""
-)
+func Example_stream() {
+	apiKey := ""
 
-func main() {
 	config := gpt.NewConfig().WithAPIKey(apiKey)
 	client := gpt.NewClient(config)
 

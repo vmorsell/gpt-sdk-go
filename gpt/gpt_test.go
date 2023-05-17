@@ -1,6 +1,7 @@
 package gpt
 
 import (
+	"fmt"
 	"os"
 	"testing"
 
@@ -56,6 +57,35 @@ func TestChatCompletion(t *testing.T) {
 	}
 }
 
+func ExampleClient_ChatCompletion() {
+	config := NewConfig().WithAPIKey("xyz")
+	client := NewClient(config)
+
+	in := ChatCompletionInput{
+		Messages: []Message{
+			{
+				Role:    RoleSystem,
+				Content: "You are a helpful assistant.",
+			},
+			{
+				Role:    RoleUser,
+				Content: `Please reply with the text "Hello, World!". Nothing else.`,
+			},
+		},
+	}
+	res, err := client.ChatCompletion(in)
+	if err != nil {
+		panic(err)
+	}
+
+	if res.Choices == nil {
+		panic("no choices")
+	}
+
+	fmt.Println(res.Choices[0].Message.Content)
+	// Output: Hello, World!
+}
+
 func TestChatCompletionStream(t *testing.T) {
 	tests := []struct {
 		in     ChatCompletionInput
@@ -101,4 +131,39 @@ func TestChatCompletionStream(t *testing.T) {
 
 		require.Equal(t, tt.tokens, tokens)
 	}
+}
+
+func ExampleClient_ChatCompletionStream() {
+	client := NewClient(NewConfig().WithAPIKey("xyz"))
+
+	in := ChatCompletionInput{
+		Messages: []Message{
+			{
+				Role:    RoleUser,
+				Content: `Please reply with the text "Hello, World!". Nothing else.`,
+			},
+		},
+		Stream: true,
+	}
+
+	ch := make(chan *ChatCompletionChunkEvent)
+	go func() {
+		if err := client.ChatCompletionStream(in, ch); err != nil {
+			panic(err)
+		}
+	}()
+
+	for {
+		ev, ok := <-ch
+		if !ok {
+			break
+		}
+
+		if ev.Choices[0].Delta.Content == nil {
+			continue
+		}
+
+		fmt.Print(*ev.Choices[0].Delta.Content)
+	}
+	// Output: Hello, World!
 }
