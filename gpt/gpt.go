@@ -12,8 +12,8 @@ import (
 )
 
 const (
-	defaultEndpoint = "https://api.openai.com/v1"
-	defaultModel    = GPT35Turbo
+	DefaultEndpoint = "https://api.openai.com/v1"
+	DefaultModel    = GPT35Turbo
 	jsonMIME        = "application/json"
 )
 
@@ -30,7 +30,7 @@ type Config struct {
 // NewConfig returns a pointer to a new initialized config.
 func NewConfig() *Config {
 	return &Config{
-		Endpoint: defaultEndpoint,
+		Endpoint: DefaultEndpoint,
 	}
 }
 
@@ -198,7 +198,7 @@ func (c *Client) ChatCompletion(in ChatCompletionInput) (*ChatCompletionOutput, 
 	}
 
 	if in.Model == "" {
-		in.Model = defaultModel
+		in.Model = DefaultModel
 	}
 
 	out := ChatCompletionOutput{}
@@ -217,7 +217,7 @@ func (c *Client) ChatCompletionStream(in ChatCompletionInput, out chan *ChatComp
 	}
 
 	if in.Model == "" {
-		in.Model = defaultModel
+		in.Model = DefaultModel
 	}
 
 	if err := c.makeCallWithResponseStream(chatCompletionsPath, in, out); err != nil {
