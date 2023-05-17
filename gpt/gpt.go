@@ -100,7 +100,7 @@ func (c *Client) makeCall(httpPath string, payload interface{}, out interface{})
 	}
 
 	if err := json.Unmarshal(body, &out); err != nil {
-		return fmt.Errorf("unmarshal: %w", err)
+		return fmt.Errorf("unmarshal %#v (%s): %w", body, string(body), err)
 	}
 
 	return nil

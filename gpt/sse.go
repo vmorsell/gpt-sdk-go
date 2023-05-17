@@ -43,7 +43,7 @@ func isDoneEvent(data []byte) bool {
 func parseEvent(data []byte) (*ChatCompletionChunkEvent, error) {
 	event := ChatCompletionChunkEvent{}
 	if err := json.Unmarshal(data, &event); err != nil {
-		return nil, fmt.Errorf("unmarshal: %w", err)
+		return nil, fmt.Errorf("unmarshal %#v (%s): %w", data, string(data), err)
 	}
 	return &event, nil
 }
