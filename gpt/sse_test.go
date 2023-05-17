@@ -6,7 +6,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestTrimEventData(t *testing.T) {
+func TestParseEventData(t *testing.T) {
 	tests := []struct {
 		name string
 		data []byte
@@ -14,8 +14,8 @@ func TestTrimEventData(t *testing.T) {
 	}{
 		{
 			name: "ok",
-			data: []byte(`data: {"choices": [{"index": 3}]}\n`),
-			out:  []byte(`{"choices": [{"index": 3}]}`),
+			data: []byte("data: {\"choices\": [{\"index\": 3}]}\n"),
+			out:  []byte("{\"choices\": [{\"index\": 3}]}"),
 		},
 	}
 

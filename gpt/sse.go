@@ -26,13 +26,13 @@ type Delta struct {
 }
 
 const (
-	dataPrefix = "data:"
+	dataPrefix = "data: "
 	doneEvent  = "[DONE]"
 )
 
 func parseEventData(data []byte) []byte {
-	data = bytes.TrimPrefix(data, []byte(dataPrefix))
-	data = bytes.Trim(data, "\x5c\x6e ") // \x5c\x63 = \n
+	data = bytes.TrimLeft(data, dataPrefix)
+	data = bytes.TrimRight(data, "\n")
 	return data
 }
 
